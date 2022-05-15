@@ -1,0 +1,71 @@
+﻿<Window x:Class="Пиши_Стирай.Windows.OrderFormation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Пиши_Стирай.Windows"
+        mc:Ignorable="d"
+        Title="Настройка заказа — Пиши-Стирай" 
+        Height="450" Width="800"
+        MinHeight="425" MinWidth="775"
+        Loaded="Window_Loaded"
+        SizeChanged="Window_SizeChanged">
+
+    <Grid Margin="2.5">
+        <!-- #region Технические элементы. -->
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="240*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="35*"/>
+        </Grid.RowDefinitions>
+        <!-- #endregion -->
+
+        <!-- #region Информация о заказе. -->
+        
+        <TextBlock Name="UserRoleInfo" Grid.Row="0" Grid.Column="0" Text="Клиент:" FontSize="18"/>
+        <TextBlock Name="UserNameInfo" Grid.Row="0" Grid.Column="1" FontSize="16"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Код получения:" FontSize="18"/>
+        <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Path=CurrentOrder.TakeCode}" FontSize="18"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Дата доставки:" FontSize="18"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Path=CurrentOrder.OrderBeginDate, StringFormat=dd.MM.yyyy}" FontSize="18" 
+                    IsEnabled="False"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Дата доставки:" FontSize="18"/>
+        <DatePicker Grid.Row="1" Grid.Column="3" SelectedDate="{Binding Path=CurrentOrder.OrderDeliveryDate, StringFormat=dd.MM.yyyy}" FontSize="18" 
+                    IsEnabled="False"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Итоговая цена:" FontSize="18"/>
+        <TextBlock Name="FinalCost_TextBlock" Grid.Row="2" Grid.Column="1" Text="{Binding Path=CurrentOrder.FinalOrderCost, StringFormat=0.00}" FontSize="18"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="Итоговая скидка:" FontSize="18"/>
+        <TextBlock Name="FinalDiscount_TextBlock" Grid.Row="2" Grid.Column="3" Text="{Binding Path=CurrentOrder.FinalOrderDiscount, StringFormat=0.00}" FontSize="18"/>
+        <!-- #endregion -->
+
+        <ListView Name="AllProductsInOrder" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" SelectionChanged="AllProductsInOrder_SelectionChanged"/>
+
+        <!-- #region Нижняя панель. -->
+        
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Количество товара:" FontSize="18"/>
+        <TextBox Name="CurrentProductCount_TextBox" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TextChanged="CurrentProductCount_TextBox_TextChanged"/>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Пункт выдачи:" FontSize="18"/>
+        <ComboBox Name="PickupPointSelector" Grid.Row="5" Grid.Column="1" FontSize="18" SelectionChanged="PickupPointSelector_SelectionChanged"
+                  DisplayMemberPath="Point"/>
+
+        <Button Name="SaveOrder" Grid.Row="5" Grid.Column="3" Content="Сохранить" FontSize="18" Click="SaveOrder_Click"/>
+        <!-- #endregion -->
+    </Grid>
+</Window>

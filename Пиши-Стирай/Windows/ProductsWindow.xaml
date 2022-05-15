@@ -1,0 +1,77 @@
+﻿<Window x:Class="Пиши_Стирай.Windows.ProductsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Пиши_Стирай.Windows"
+        xmlns:bind="clr-namespace:Пиши_Стирай.Classes"
+        mc:Ignorable="d"
+        Title="Список товаров — Пиши-Стирай" 
+        Height="450" Width="800"
+        MinHeight="425" MinWidth="775"
+        Loaded="Window_Loaded"
+        SizeChanged="Window_SizeChanged"
+        Closing="Window_Closing">
+
+    <Grid>
+        <!-- #region Технические элементы. -->
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="310*"/>
+            <RowDefinition Height="45*"/>
+        </Grid.RowDefinitions>
+        <!-- #endregion -->
+        
+        <!-- #region Верхняя панель. -->
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Поиск:" FontSize="18"/>
+        <TextBox Name="SearchBox" Grid.Row="1" Grid.Column="0" FontSize="16"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Сортировка:" FontSize="18"/>
+        <ComboBox Name="SortComboBox" Grid.Row="1" Grid.Column="1" FontSize="18">
+            <ComboBoxItem Content="Без сортировки" />
+
+            <ComboBoxItem Content="По возрастанию:" FontSize="22" IsEnabled="False"/>
+            <ComboBoxItem Content="Стоимость" />
+
+            <ComboBoxItem Content="По убыванию:" FontSize="22" IsEnabled="False"/>
+            <ComboBoxItem Content="Стоимость" />
+        </ComboBox>
+        
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Фильтрация:" FontSize="18"/>
+        <ComboBox Name="FilterComboBox" Grid.Row="1" Grid.Column="2" FontSize="18">
+            <ComboBoxItem Content="Все диапазоны скидок"/>
+            <ComboBoxItem Content="0% — 9.99%" />
+            <ComboBoxItem Content="10% — 14.99%" />
+            <ComboBoxItem Content="Более 15%" />
+        </ComboBox>
+
+        <TextBlock Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" TextWrapping="Wrap" Text="{Binding Path=(bind:SessionData.CurrentUser)}" FontSize="18"/>
+        <!-- #endregion -->
+
+        <ListView Name="AllProductsListView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" 
+                  MouseDoubleClick="AllProductsListView_MouseDoubleClick"/>
+
+        <!-- #region Нижняя панель. -->
+
+        <Button Name="CurrentOrder" Grid.Row="3" Grid.Column="0" Content="Текущий заказ" FontSize="18" 
+                Click="CurrentOrder_Click"/>
+        <Button Name="AllOrders" Grid.Row="3" Grid.Column="1" Content="Все заказы" FontSize="18"
+                Click="AllOrders_Click"/>
+        <Button Name="CreateProduct" Grid.Row="3" Grid.Column="2" Content="Создать товар" FontSize="18"
+                Click="CreateProduct_Click"/>
+
+        <TextBlock Name="CurrentDisplayedProducts" Grid.Row="3" Grid.Column="3" FontSize="18"
+                   Text="100 — 100"/>
+        <!-- #endregion -->
+    </Grid>
+</Window>
