@@ -39,7 +39,7 @@
         <TextBlock Grid.Row="0" Grid.Column="2" Text="Код получения:" FontSize="18"/>
         <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Path=CurrentOrder.TakeCode}" FontSize="18"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Дата доставки:" FontSize="18"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Дата заказа:" FontSize="18"/>
         <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Path=CurrentOrder.OrderBeginDate, StringFormat=dd.MM.yyyy}" FontSize="18" 
                     IsEnabled="False"/>
 
